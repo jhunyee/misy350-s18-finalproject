@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}All Directors{% endblock %}
+{% block page_content%}
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Directors:</h1>
+    <div class="row bottom-margin">
+      <a href="/director/add" class="btn btn-primary" role="button" aria-disabled="true">Add Directors</a>
+    </div>
+    {% if directors %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>About</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for director in directors %}
+          <tr>
+              <th scope="row">{{director.id}}</th>
+              <td>{{director.name}}</td>
+              <td>{{director.about}}</td>
+              <td>
+                <a href="/director/edit/{{director.id}}" class="btn btn-success" role="button">Edit</a>
+                <a href="/director/delete/{{director.id}}" class="btn btn-danger" role="button">Delete</a>
+              </td>
+          </tr>
+          {% endfor%}
+        </tbody>
+      </table>
+    {% else %}
+      <h3>there are no Directors in the database yet.</h3>
+    {% endif %}
+  </div>
+
+{% endblock%}

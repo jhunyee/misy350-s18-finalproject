@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Edit Movie{% endblock %}
+{% block page_content%}
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-music" aria-hidden="true"></i> Edit Movie:</h1>
+    <form action="/movie/edit/{{movie.id}}" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" value="{{movie.name}}" required="true">
+      </div>
+      <div class="form-group">
+        <label>Year</label>
+        <select class="form-control" name="year">
+          {% for i in range(1950, 2025) %}
+            {% if i == movie.year %}
+              <option selected="selected">{{i}}</option>
+            {% else %}
+              <option>{{i}}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Director</label>
+        <select class="form-control" name="director">
+          {% for director in directors %}
+            {% if director == movie.director %}
+              <option selected="selected">{{director.name}}</option>
+            {% else %}
+              <option>{{director.name}}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        Director not in the list? <a href="/director/add" class="btn btn-success" role="button" aria-disabled="true">Add Directors</a>
+      </div>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+  </div>
+
+{% endblock%}

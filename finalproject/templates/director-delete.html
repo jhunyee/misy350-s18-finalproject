@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Delete Director{% endblock %}
+{% block page_content%}
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-music" aria-hidden="true"></i> Delete Director:</h1>
+    <form action="/director/delete/{{director.id}}" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" value="{{director.name}}" required="true" readonly="true">
+      </div>
+      <div class="form-group">
+        <label>About</label>
+        <textarea class="form-control" name="about" required="true" readonly="true">{{director.about}}</textarea>
+      </div>
+      <button type="submit" class="btn btn-danger" id="delete_btn">Delete</button>
+    </form>
+  </div>
+
+{% endblock%}

@@ -1,0 +1,66 @@
+{% extends "base.html"%}
+{% block title %}All Movies{% endblock %}
+{% block page_content%}
+
+<!-- Page Content -->
+<div class="container">
+  <h1 class="mt-5"><i class="fa fa-music" aria-hidden="true"></i> Movies:</h1>
+  <div class="row bottom-margin">
+    <a href="/movie/add" class="btn btn-primary" role="button" aria-disabled="true">Add Movies</a>
+  </div>
+  {% if movies %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Year</th>
+        <th>Artist</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for movie in movies %}
+      <tr>
+        <th scope="row">{{movie.id}}</th>
+        <td>{{movie.name}}</td>
+        <td>{{movie.year}}</td>
+        <td>{{movie.director.name}}</td>
+        <td>
+          <!--  view lyrics button trigger modal -->
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#{{movie.id}}">
+                View
+              </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="{{movie.id}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">{{movie.name}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <a href="/movie/edit/{{movie.id}}" class="btn btn-success" role="button" aria-disabled="true">Edit</a>
+          <a href="/movie/delete/{{movie.id}}" class="btn btn-danger" role="button" aria-disabled="true">Delete</a>
+        </td>
+      </tr>
+
+      {% endfor%}
+    </tbody>
+  </table>
+  {% else %}
+  <h3>There are no movies in the database yet.</h3> {% endif %}
+</div>
+
+{% endblock%}
